@@ -5,7 +5,7 @@
  * Description: Add an optional 'view all' to multi-page posts
  * Author: Andrew Norcross
  * Author URI: http://andrewnorcross.com
- * Version: 0.0.1
+ * Version: 0.0.2
  * Text Domain: single-view-option
  * Domain Path: languages
  *
@@ -41,7 +41,7 @@ if ( ! defined( 'RKV_SVO_BASE' ) ) {
 
 // Define our version if not already done so.
 if ( ! defined( 'RKV_SVO_VER' ) ) {
-	define( 'RKV_SVO_VER', '0.0.1' );
+	define( 'RKV_SVO_VER', '0.0.2' );
 }
 
 /**

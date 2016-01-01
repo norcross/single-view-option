@@ -37,6 +37,11 @@ class RKV_SVO_Admin
 	 */
 	public function load_checkbox() {
 
+		// Bail if we aren't on a supported type.
+		if ( false === $types = RKV_SVO_Helper::check_post_types() ) {
+			return;
+		}
+
 		// Only fire if user has the option.
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return;

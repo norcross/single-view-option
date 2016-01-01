@@ -31,6 +31,7 @@ class RKV_SVO_Front
 		add_action( 'wp_head',                      array( $this, 'add_canonical'           ),  5       );
 		add_action( 'template_redirect',            array( $this, 'redirect'                ),  1       );
 		add_filter( 'query_vars',                   array( $this, 'query_vars'              )           );
+		add_filter( 'body_class',                   array( $this, 'body_class'              )           );
 		add_filter( 'the_content',                  array( $this, 'show_view_link'          ),  5       );
 		add_filter( 'the_content',                  array( $this, 'view_all_content'        ),  10      );
 		add_filter( 'wp_link_pages_args',           array( $this, 'link_args'               )           );
@@ -200,6 +201,43 @@ class RKV_SVO_Front
 
 		// Return our full array.
 		return $vars;
+	}
+
+	/**
+	 * Add a custom body class when the "view all" is being displayed.
+	 *
+	 * @param  array $classes  The original array of classes
+	 *
+	 * @return array $classes  The updated array of classes
+	 */
+	public function body_class( $classes ) {
+
+		// Bail if we aren't on a supported type.
+		if ( false === $types = RKV_SVO_Helper::check_post_types() ) {
+			return $classes;
+		}
+
+		// Call the $wp_query global.
+		global $wp_query;
+
+		// Get my post ID to check against.
+		$pid    = ! empty( $wp_query->query['p'] ) ? $wp_query->query['p'] : 0;
+
+		// Check the content for the `nextpage` tag.
+		if ( false === $tag = RKV_SVO_Helper::check_post_content( $pid ) ) {
+			return $classes;
+		}
+
+		// If we have not activated it, return the original array.
+		if ( ! isset( $wp_query->query['all'] ) || false === $check = RKV_SVO_Helper::check_post_active( $pid ) ) {
+			return $classes;
+		}
+
+		// Add our new "view all" class.
+		$classes[]  = apply_filters( 'svo_view_all_body_class', 'view-all-active' );
+
+		// Return the array of classes.
+		return $classes;
 	}
 
 	/**

@@ -3,8 +3,8 @@ Contributors: norcross, reaktivstudios
 Tags: single page, nexttag
 Donate link: http://andrewnorcross.com/donate
 Requires at least: 4.2
-Tested up to: 4.3
-Stable tag: 0.0.1
+Tested up to: 4.4
+Stable tag: 0.0.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -51,6 +51,11 @@ add_filter( 'svo_enable_auto', '__return_true' );
 1. The standard checkbox on content.
 
 == Changelog ==
+
+= 0.0.2: 2016-01-01 =
+
+* Added `view-all-active` body class when "view all" is enabled.
+* Removed meta box on non-supported post types.
 
 = 0.0.1: 2015-12-27 =
 
